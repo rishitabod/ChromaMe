@@ -15,17 +15,19 @@ function Navbar() {
         </p>
       </div>
 
-      <button style={{
-        padding: '10px 24px',
-        backgroundColor: '#c0392b',
-        color: 'white',
-        border: 'none',
-        borderRadius: '30px',
-        fontSize: '14px',
-        cursor: 'pointer',
-      }}>
-        Get Started
-      </button>
+      <button
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  style={{
+    padding: '10px 24px',
+    backgroundColor: '#c0392b',
+    color: 'white',
+    border: 'none',
+    borderRadius: '30px',
+    fontSize: '14px',
+    cursor: 'pointer',
+  }}>
+  Get Started
+</button>
     </nav>
   )
 }
