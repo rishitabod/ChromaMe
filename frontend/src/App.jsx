@@ -5,8 +5,10 @@ import ColorPalette from './components/ColorPalette'
 import JewelrySection from './components/JewelrySection'
 import SkinToneSelector from './components/SkinToneSelector'
 import Footer from './components/Footer'
+import useIsMobile from './hooks/useIsMobile'
 
 function App() {
+  const isMobile = useIsMobile()
   const [showQuiz, setShowQuiz] = useState(false)
   const [skinTone, setSkinTone] = useState(null)
 
@@ -22,7 +24,7 @@ function App() {
       {!showQuiz && !skinTone && (
         <>
           <div style={{ textAlign: 'center', padding: '80px 20px 40px' }}>
-            <h1 style={{ fontSize: '48px', color: '#1a1a1a', marginBottom: '8px' }}>
+            <h1 style={{ fontSize: isMobile ? '36px' : '48px', color: '#1a1a1a', marginBottom: '8px' }}>
               Find Your
             </h1>
             <h1 style={{ fontSize: '48px', color: '#c0392b', marginBottom: '16px' }}>
@@ -60,7 +62,7 @@ function App() {
     Most people wear colors that fight their natural tone. ChromaMe fixes that.
   </p>
 
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '24px' }}>
     {[
       {
         title: "Analyzes Your Undertone",
@@ -120,7 +122,7 @@ function App() {
       { step: "02", title: "Get Your Results", desc: "We analyze your answers and determine your undertone" },
       { step: "03", title: "Discover Your Colors", desc: "Receive a full color palette and jewelry recommendations" },
     ].map((item, i) => (
-      <div key={i} style={{ flex: 1, textAlign: 'center' }}>
+      <div key={i} style={{ flexDirection: isMobile ? 'column' : 'row', textAlign: 'center' }}>
         <p style={{
           fontSize: '40px',
           fontWeight: '700',
@@ -147,31 +149,48 @@ function App() {
       {showQuiz && <Quiz onResult={handleQuizResult} />}
 
       {skinTone && (
-        <>
-          <div style={{ textAlign: 'center', padding: '40px 20px 0px' }}>
-            <p style={{ color: '#888', marginBottom: '8px' }}>Your skin tone is —</p>
-            <h2 style={{ color: '#c0392b', textTransform: 'capitalize', marginBottom: '24px' }}>
-              {skinTone}
-            </h2>
-            <button
-              onClick={() => { setSkinTone(null); setShowQuiz(false) }}
-              style={{
-                padding: '10px 28px',
-                backgroundColor: 'white',
-                color: '#c0392b',
-                border: '1px solid #c0392b',
-                borderRadius: '30px',
-                fontSize: '14px',
-                cursor: 'pointer',
-                marginBottom: '20px'
-              }}>
-              Retake Quiz
-            </button>
-          </div>
-          <ColorPalette skinTone={skinTone} />
-          <JewelrySection skinTone={skinTone} />
-        </>
-      )}
+  <>
+    <div style={{
+      maxWidth: '700px',
+      margin: '40px auto',
+      padding: '40px',
+      backgroundColor: '#f9f9f9',
+      border: '1px solid #f2d4d4',
+      borderRadius: '16px',
+      textAlign: 'center',
+    }}>
+      <p style={{ color: '#888', fontSize: '14px', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        Your Result
+      </p>
+      <h2 style={{ fontSize: '36px', color: '#c0392b', textTransform: 'capitalize', marginBottom: '16px' }}>
+        {skinTone} Undertone
+      </h2>
+      <p style={{ color: '#555', fontSize: '15px', lineHeight: '1.7', marginBottom: '28px' }}>
+        {{
+          warm: "Your skin has golden, peachy or yellow undertones. You look best in earthy, warm shades like terracotta, mustard and olive. Gold jewelry complements your natural glow beautifully.",
+          cool: "Your skin has pink, red or bluish undertones. You radiate in jewel tones like sapphire, emerald and lavender. Silver and white gold jewelry enhance your natural features.",
+          neutral: "Your skin has a balance of warm and cool undertones. You have the most flexibility — both warm and cool colors work well on you. Rose gold jewelry sits perfectly on your skin.",
+        }[skinTone]}
+      </p>
+      <button
+        onClick={() => { setSkinTone(null); setShowQuiz(false) }}
+        style={{
+          padding: '10px 28px',
+          backgroundColor: 'white',
+          color: '#c0392b',
+          border: '1px solid #c0392b',
+          borderRadius: '30px',
+          fontSize: '14px',
+          cursor: 'pointer',
+        }}>
+        Retake Quiz
+      </button>
+    </div>
+    <ColorPalette skinTone={skinTone} />
+    <JewelrySection skinTone={skinTone} />
+  </>
+)}
+
       <Footer />
 
     </div>

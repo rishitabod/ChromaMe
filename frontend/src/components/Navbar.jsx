@@ -1,10 +1,12 @@
+import useIsMobile from '../hooks/useIsMobile'
 function Navbar() {
+  const isMobile = useIsMobile()
   return (
     <nav style={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '20px 40px',
+      padding: isMobile ? '16px 20px' : '20px 40px',
       backgroundColor: '#ffffff',
       borderBottom: '1px solid #f2d4d4',
     }}>
@@ -18,7 +20,7 @@ function Navbar() {
       <button
   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
   style={{
-    padding: '10px 24px',
+    padding: isMobile ? '16px 20px' : '20px 40px',
     backgroundColor: '#c0392b',
     color: 'white',
     border: 'none',

@@ -1,4 +1,6 @@
+import useIsMobile from '../hooks/useIsMobile'
 function SkinToneSelector({ onSelect }) {
+  const isMobile = useIsMobile()
   const tones = [
     {
       value: 'warm',
@@ -31,7 +33,7 @@ function SkinToneSelector({ onSelect }) {
             key={tone.value}
             onClick={() => onSelect(tone.value)}
             style={{
-              flex: 1,
+              flexDirection: isMobile ? 'column' : 'row',
               padding: '24px 16px',
               backgroundColor: '#f9f9f9',
               border: '1px solid #f2d4d4',

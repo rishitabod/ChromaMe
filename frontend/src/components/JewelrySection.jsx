@@ -1,3 +1,4 @@
+import useIsMobile from '../hooks/useIsMobile'
 const jewelryData = {
   warm: {
     title: "Jewelry For Your Warm Undertone",
@@ -32,6 +33,7 @@ const jewelryData = {
 }
 
 function JewelrySection({ skinTone }) {
+  const isMobile = useIsMobile()
   const jewelry = jewelryData[skinTone]
 
   return (
@@ -48,7 +50,7 @@ function JewelrySection({ skinTone }) {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
         gap: '16px',
       }}>
         {jewelry.items.map((item, index) => (

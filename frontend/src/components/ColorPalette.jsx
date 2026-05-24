@@ -1,3 +1,5 @@
+import useIsMobile from '../hooks/useIsMobile'
+
 const paletteData = {
   warm: {
     title: "Warm Undertone",
@@ -38,6 +40,7 @@ const paletteData = {
 }
 
 function ColorPalette({ skinTone }) {
+  const isMobile = useIsMobile()
   const palette = paletteData[skinTone]
 
   return (
@@ -54,7 +57,7 @@ function ColorPalette({ skinTone }) {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
         gap: '16px',
       }}>
         {palette.colors.map((color, index) => (
