@@ -14,6 +14,18 @@ function Navbar() {
           Discover Your Perfect Palette
         </p>
       </div>
+
+      <button style={{
+        padding: '10px 24px',
+        backgroundColor: '#c0392b',
+        color: 'white',
+        border: 'none',
+        borderRadius: '30px',
+        fontSize: '14px',
+        cursor: 'pointer',
+      }}>
+        Get Started
+      </button>
     </nav>
   )
 }
